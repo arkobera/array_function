@@ -1,0 +1,346 @@
+#include<stdio.h>
+#include<math.h>
+
+
+int dynamic_array(int *arr,int n){
+    for(int i=0;i<n;i++){
+        scanf("%d ",&arr[i]);
+    }
+}
+
+int sort(int *arr,int n){
+    int temp;
+    for(int i=0;i<n;i++){
+        for(int j=i+1;j<n;j++){
+            if(arr[i]>arr[j]){
+                temp=arr[i];
+                arr[i]=arr[j];
+                arr[j]=temp;
+            }
+        }
+    }
+}
+
+int reverse_array(int *arr,int n){
+    int mid=n/2;
+    int temp;
+    for(int i=0;i<mid;i++){
+        temp=arr[i];
+        arr[i]=arr[n-1-i];
+        arr[n-1-i]=temp;
+    }
+}
+
+int min_max(int *arr,int n){
+    int min=arr[0];
+    int max=arr[1];
+    for(int i=2;i<n;i++){
+        if(min>arr[i]){
+            min=arr[i];
+        }
+        if(max<arr[i]){
+            max=arr[i];
+        }
+    }
+    printf("min:%d max:%d",min,max);
+}
+
+int kth_smallest_element(int *arr,int n,int k){
+    sort(arr,n);
+    printf("%d",arr[k-1]);
+
+}
+
+
+int subarray_with_given_sum(){
+    int t;
+    scanf("%d",&t);
+    while(t--){
+        int n,s;
+        scanf("%d %d",&n,&s);
+        int arr[n];
+        int sum=0,flag=0,start=0;
+        for(int i=0;i<n;i++){
+            scanf("%d",&arr[i]);
+        }
+        printf("  \n");
+        for(int i=0;i<n;i++){
+            sum+=arr[i];
+            if(sum>s){
+                sum=sum-arr[start];
+                start++;
+            }
+            if(sum==s){
+                flag=1;
+                printf("%d %d",start+1,i+1);
+            }
+        }
+        if(!flag){
+            printf("no such array exists %d",sum);
+        }
+    }
+}
+
+int triplets(){
+    int t;
+    scanf("%d",&t);
+    while(t--){
+        int n,count=0;
+        scanf("%d",&n);
+        int arr[n];
+        dynamic_array(arr,n);
+        int arr_2[1000]={0};
+        for(int i=0;i<n;i++){
+            arr_2[arr[i]]=1;
+        }
+        for(int j=0;j<n-1;j++){
+            for(int k=j+1;k<n;k++){
+                if(arr_2[arr[k]+arr[j]]==1){
+                    count+=1;
+            }
+        }
+        }
+        printf(" \n");
+        printf("%d",count);
+}
+}
+
+int max(int n, int m){
+    if(n>m)
+    return n;
+    else
+    return m;
+}
+
+int max_sum_array(){
+    int t;
+    scanf("%d",&t);
+    while(t--){
+        int n;
+        scanf("%d",&n);
+        int arr[n];
+        dynamic_array(arr,n);
+        printf("\n ");
+        int lMax=arr[0],gMax=arr[0];
+        for(int i=1;i<n;i++){
+            if(lMax>lMax+arr[i]){
+                continue;
+            }
+            else{
+                lMax=lMax+arr[i];
+            }
+            gMax=max(lMax,gMax);
+        }
+        printf(" \n");
+        printf("%d",gMax);
+    }
+}
+
+int missing_number_in_array(){
+    int t;
+    scanf("%d",&t);
+    while(t--){
+        int n;
+        scanf("%d",&n);
+        int arr[n];
+        dynamic_array(arr,n);
+        printf("\n");
+        int start=arr[0], end=arr[n-1];
+        for(int i=0;i<n && start<=end;i++){
+            if(arr[i]==start){
+                start++;
+            }
+            else{
+                printf("%d\n",start);
+                start++;
+                i-=1;
+            }
+        }
+    }
+}
+
+int merge_two_arrays(){
+    int t;
+    scanf("%d",&t);
+    while(t--){
+        int n,m;
+        scanf("%d %d",&n,&m);
+        int arr_1[n],arr_2[m],arr_3[m+n];
+        dynamic_array(arr_1,n);
+        printf("\n");
+        dynamic_array(arr_2,m);
+        printf("\n");
+        for(int i=0;i<m+n;i++){
+            if(i<m){
+                arr_3[i]=arr_2[i];
+            }
+            else{
+                arr_3[i]=arr_1[i-m];
+            }
+        }
+        for(int j=0;j<m+n;j++){
+            printf("%d ",arr_3[j]);
+        }
+    }
+}
+
+int removing_duplicates(){
+    int t;
+    scanf("%d",&t);
+    while(t--){
+        int n;
+        scanf("%d",&n);
+        int arr[n];
+        dynamic_array(arr,n);
+        printf("\n");
+        for(int i=0;i<n;i++){
+            for(int j=0;j<i;j++){
+                if(arr[i]==arr[j]){
+                    arr[i]=0;
+                }
+            }
+        }
+        for(int k=0;k<n;k++){
+            if(arr[k]!=0){
+                printf("%d",arr[k]);
+            }
+        }
+    }
+}
+
+int alternate_arrangement(){
+    int t;
+    scanf("%d",&t);
+    while(t--){
+        int n,a,b;
+        scanf("%d",&n);
+        int arr[n];
+        dynamic_array(arr,n);
+        printf("\n");
+        int min=0,max=n-1,div=(arr[max]+1);
+       for(int i=0;i<n;i++){
+        if(i%2==0){
+            arr[i]=arr[i]+(arr[max]%div)*div;
+            printf("%d ",(arr[i]/div));
+            max--;
+        }
+        else{
+            arr[i]=arr[i]+(arr[min]%div)*div;
+            printf("%d ",(arr[i]/div));
+            min++;
+        }
+       }
+    }
+}
+
+int number_of_pairs(){
+    int t;
+    scanf("%d ",&t);
+    while(t--){
+        int n,m;
+        int count=0;
+        scanf("%d %d",&n,&m);
+        printf("\n");
+        int arr_1[n-1],arr_2[m];
+        dynamic_array(arr_1,(n-1));
+        printf("\n");
+        dynamic_array(arr_2,m);
+        printf("\n");
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(pow(arr_1[i],arr_2[j])>pow(arr_2[j],arr_1[i])){
+                    count+=1;
+                }
+            }
+        }
+        printf("%d",count);
+    }
+}
+
+int inversion_count(){
+    int t;
+    scanf("%d",&t);
+    while(t--){
+        int n;
+        int count=0;
+        scanf("%d",&n);
+        printf("\n");
+        int arr[n-1];
+        dynamic_array(arr,n-1);
+        printf("\n");
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                if(arr[i]>arr[j] && j>i){
+                    count+=1;
+                }
+            }
+            
+        }
+        printf("%d",count);
+    }
+}
+
+int sort_zeronetwos(){
+    int t;
+    scanf("%d",&t);
+    while(t--){
+        int n;
+        scanf("%d",&n);
+        printf("\n");
+        int arr[n];
+        dynamic_array(arr,n);
+        printf("\n");
+        sort(arr,n);
+        printf("sorted array\n");
+        for(int i=0;i<n;i++){
+            printf("%d",arr[i]);
+        }
+    }
+}
+
+int equilibrium_point(int *arr,int n){
+    
+        int sum1,sum2;
+        for(int i=0;i<n;i++){
+            sum1=0,sum2=0;
+            for(int j=0;j<i;j++){
+                sum1+=arr[j];
+            }
+            for(int k=(i+1);k<n;k++){
+                sum2+=arr[k];
+                
+            }
+            printf("\n");
+            if(sum1==sum2){
+                printf("%d\n",i+1);
+            }
+        }
+    
+}
+
+int leaders_in_an_array(int *arr,int n){
+    int reqsum=0,sum,flag;
+    for(int i=0;i<n;i++){
+        reqsum=arr[i];
+        flag=0;
+        for(int j=i+1;j<n;j++){
+            sum=arr[j];
+        if(reqsum<sum){
+            flag=1;
+            break;
+        }
+        }
+        if(!flag){
+            printf("%d ",reqsum);
+        }  
+    } 
+}
+
+int main(){
+    int n;
+    scanf("%d",&n);
+    int arr[n];
+    dynamic_array(arr,n);
+    printf("\n");
+    leaders_in_an_array(arr,n);
+}
